@@ -18,13 +18,13 @@
             display: block;
             margin: 0 auto;
             font-size: 1.5em; /* Puoi regolare la dimensione del carattere a tuo piacimento */
-            padding: 5px 10px;
+            padding: 3px 7px;
             background-color: #ff796f; /* Cambia il colore di sfondo a tuo piacimento */
             color: #fff; /* Cambia il colore del testo a tuo piacimento */
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 30px;
+            margin-top: 500px;
         }
 
         .immagine-adattabile {
@@ -76,6 +76,7 @@
 
         #riepilogo {
             display: block;
+            margin-top: 100px;
         }
 
         #riepilogo h2 {
@@ -94,6 +95,13 @@
 
         #esportaButton {
             margin-top: 10px;
+            font-size: 1.5em; /* Aumenta la dimensione del carattere */
+            background-color: #4caf50; /* Cambia il colore di sfondo a verde */
+            color: #fff; /* Cambia il colore del testo a bianco */
+            padding: 3px 7px; /* Aumenta il padding per renderlo più grande */
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -778,9 +786,16 @@
 
     // Funzione per esportare il riepilogo
     function esportaRiepilogo() {
+
+        var oggi = new Date();
+        var giorno = oggi.getDate();
+        var mese = oggi.getMonth() + 1; // Gennaio è 0
+        var anno = oggi.getFullYear();
+
         // Creazione del testo per il file .txt
-        var testoFile = "Elenco I TURNO:\n" + elencoITurno.join("\n") + "\nSomma I TURNO: " + sommaITurno + "\n\n";
-        testoFile += "Elenco II TURNO:\n" + elencoIITurno.join("\n") + "\nSomma II TURNO: " + sommaIITurno;
+        var testoFile = "Pranzo convittori " + giorno + '/' + mese + '/' + anno + "\n\n";
+        testoFile += "Elenco I TURNO:\n" + elencoITurno.join("\n") + "\nTotale: " + sommaITurno + "\n\n";
+        testoFile += "Elenco II TURNO:\n" + elencoIITurno.join("\n") + "\nTotale: " + sommaIITurno;
 
         // Creazione dell'oggetto Blob
         var blob = new Blob([testoFile], { type: 'text/plain' });
@@ -789,12 +804,7 @@
         var link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
 
-        var oggi = new Date();
-        var giorno = oggi.getDate();
-        var mese = oggi.getMonth() + 1; // Gennaio è 0
-        var anno = oggi.getFullYear();
-    
-        var nomeFile = 'Pranzo_' + giorno + '_' + mese + '_' + anno + '.txt';
+        var nomeFile = 'Convittori_Pranzo_' + giorno + '_' + mese + '_' + anno + '.txt';
 
         link.download = nomeFile;
         link.click();
