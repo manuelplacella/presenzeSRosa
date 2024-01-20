@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina con Riepilogo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .immagine-adattabile {
+            width: 100%;
+            height: auto;
+        }
+
+        #dataOggi {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            color: #333;
+        }
+
+        #lista {
+            margin-bottom: 20px;
+        }
+
+        .riga {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .rigaPulsantePremutoI {
+            background-color: #8dff8d; /* Verde */
+        }
+
+        .rigaPulsantePremutoII {
+            background-color: #ffa500; /* Arancione */
+        }
+
+        .nome {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+        }
+
+        .pulsante-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .pulsante-container button {
+            flex-grow: 1;
+            margin-left: 20px;
+        }
+
+        #riepilogo {
+            display: block;
+        }
+
+        #riepilogo h2 {
+            color: #333;
+        }
+
+        #riepilogoLista {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #riepilogoLista li {
+            margin-bottom: 5px;
+        }
+
+        #esportaButton {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<img src="intestazione.jpeg" alt="Descrizione dell'immagine" class="immagine-adattabile">
+
+<div id="dataOggi"></div>
+
+<h1>Presenze Convittori</h1>
+
+<!-- Contenitore per l'elenco -->
+<div id="lista">
+    <div class="riga" id="riga01">
+        <div class="nome">
+            AZZOUZ Rayan
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('AZZOUZ Rayan', 'riga01', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('AZZOUZ Rayan', 'riga01', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga01')" id="annulla01" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga02">
+        <div class="nome">
+            BONFRISCO Pasquale
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('BONFRISCO Pasquale', 'riga02', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('BONFRISCO Pasquale', 'riga02', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga02')" id="annulla02" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga03">
+        <div class="nome">
+            BOVI Nicolo'
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('BOVI Nicolò', 'riga03', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('BOVI Nicolò', 'riga03', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga03')" id="annulla03" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga04">
+        <div class="nome">
+            BUFFO Aldo
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('BUFFO Aldo', 'riga04', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('BUFFO Aldo', 'riga04', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga04')" id="annulla04" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga05">
+        <div class="nome">
+            CARNESCIALI Matteo
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('CARNESCIALI Matteo', 'riga05', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('CARNESCIALI Matteo', 'riga05', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga05')" id="annulla05" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga06">
+        <div class="nome">
+            CICALE Egidio
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('CICALE Egidio', 'riga06', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('CICALE Egidio', 'riga06', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga06')" id="annulla06" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga07">
+        <div class="nome">
+            CIRIGLIANO Antony
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('CIRIGLIANO Antony', 'riga07', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('CIRIGLIANO Antony', 'riga07', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga07')" id="annulla07" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga08">
+        <div class="nome">
+            CORDASCO Nicola
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('CORDASCO Nicola', 'riga08', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('CORDASCO Nicola', 'riga08', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga08')" id="annulla08" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga09">
+        <div class="nome">
+            CRISTIANO Luca
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('CRISTIANO Luca', 'riga09', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('CRISTIANO Luca', 'riga09', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga09')" id="annulla09" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga10">
+        <div class="nome">
+            DE SANTO Mattia
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('DE SANTO Mattia', 'riga10', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('DE SANTO Mattia', 'riga10', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga10')" id="annulla10" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga11">
+        <div class="nome">
+            DI PIERRO Salvatore
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('DI PIERRO Salvatore', 'riga11', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('DI PIERRO Salvatore', 'riga11', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga11')" id="annulla11" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga12">
+        <div class="nome">
+            DI SENSO Andrea
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('DI SENSO Andrea', 'riga12', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('DI SENSO Andrea', 'riga12', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga12')" id="annulla12" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga13">
+        <div class="nome">
+            GALLITELLI Bernardino
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('GALLITELLI Bernardino', 'riga13', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('GALLITELLI Bernardino', 'riga13', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga13')" id="annulla13" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga14">
+        <div class="nome">
+            GIUSEFFI Andrea Tomas
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('GIUSEFFI Andrea Tomas', 'riga14', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('GIUSEFFI Andrea Tomas', 'riga14', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga14')" id="annulla14" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga15">
+        <div class="nome">
+            GUERCIO Andrea
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('GUERCIO Andrea', 'riga15', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('GUERCIO Andrea', 'riga15', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga15')" id="annulla15" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga16">
+        <div class="nome">
+            LA GRUTTA Mattia
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('LA GRUTTA Mattia', 'riga16', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('LA GRUTTA Mattia', 'riga16', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga16')" id="annulla16" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga17">
+        <div class="nome">
+            LAGRUTTA Davide
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('LAGRUTTA Davide', 'riga17', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('LAGRUTTA Davide', 'riga17', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga17')" id="annulla17" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga18">
+        <div class="nome">
+            LANDI Elio Alfredo
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('LANDI Elio Alfredo', 'riga18', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('LANDI Elio Alfredo', 'riga18', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga18')" id="annulla18" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga19">
+        <div class="nome">
+            LAPENNA Gabriele
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('LAPENNA Gabriele', 'riga19', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('LAPENNA Gabriele', 'riga19', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga19')" id="annulla19" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga20">
+        <div class="nome">
+            LENTINI Gianpaolo
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('LENTINI Gianpaolo', 'riga20', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('LENTINI Gianpaolo', 'riga20', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga20')" id="annulla20" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga21">
+        <div class="nome">
+            LIBERTELLA Andrea
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('LIBERTELLA Andrea', 'riga21', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('LIBERTELLA Andrea', 'riga21', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga21')" id="annulla21" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga22">
+        <div class="nome">
+            LIBONE Giuseppe
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('LIBONE Giuseppe', 'riga22', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('LIBONE Giuseppe', 'riga22', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga22')" id="annulla22" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga23">
+        <div class="nome">
+            MALLAURINO Cristian
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('MALLAURINO Cristian', 'riga23', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('MALLAURINO Cristian', 'riga23', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga23')" id="annulla23" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga24">
+        <div class="nome">
+            MANCINO Federico
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('MANCINO Federico', 'riga24', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('MANCINO Federico', 'riga24', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga24')" id="annulla24" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga25">
+        <div class="nome">
+            MANFREDI Ilario
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('MANFREDI Ilario', 'riga25', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('MANFREDI Ilario', 'riga25', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga25')" id="annulla25" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga26">
+        <div class="nome">
+            MARINO Francesco
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('MARINO Francesco', 'riga26', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('MARINO Francesco', 'riga26', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga26')" id="annulla26" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga27">
+        <div class="nome">
+            MIRRA Mattia
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('MIRRA Mattia', 'riga27', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('MIRRA Mattia', 'riga27', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga27')" id="annulla27" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga28">
+        <div class="nome">
+            NARDIELLO Donato
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('NARDIELLO Donato', 'riga28', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('NARDIELLO Donato', 'riga28', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga28')" id="annulla28" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga29">
+        <div class="nome">
+            NASTRI Antonio
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('NASTRI Antonio', 'riga29', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('NASTRI Antonio', 'riga29', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga29')" id="annulla29" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga30">
+        <div class="nome">
+            NIGRO Pasquale Egidio
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('NIGRO Pasquale Egidio', 'riga30', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('NIGRO Pasquale Egidio', 'riga30', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga30')" id="annulla30" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga31">
+        <div class="nome">
+            ORSINI Rocco
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('ORSINI Rocco', 'riga31', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('ORSINI Rocco', 'riga31', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga31')" id="annulla31" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga32">
+        <div class="nome">
+            PADELLI Alessandro
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('PADELLI Alessandro', 'riga32', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('PADELLI Alessandro', 'riga32', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga32')" id="annulla32" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga33">
+        <div class="nome">
+            PASSANNANTE Michele Junior
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('PASSANNANTE Michele Junior', 'riga33', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('PASSANNANTE Michele Junior', 'riga33', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga33')" id="annulla33" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga34">
+        <div class="nome">
+            PERRONE Mario
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('PERRONE Mario', 'riga34', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('PERRONE Mario', 'riga34', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga34')" id="annulla34" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga35">
+        <div class="nome">
+            PETRONE Attilio Saverio
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('PETRONE Attilio Saverio', 'riga35', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('PETRONE Attilio Saverio', 'riga35', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga35')" id="annulla35" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga36">
+        <div class="nome">
+            PETRONE Fernando Maria
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('PETRONE Fernando Maria', 'riga36', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('PETRONE Fernando Maria', 'riga36', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga36')" id="annulla36" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga37">
+        <div class="nome">
+            PICCOLO Giuseppe
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('PICCOLO Giuseppe', 'riga37', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('PICCOLO Giuseppe', 'riga37', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga37')" id="annulla37" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga38">
+        <div class="nome">
+            RIENTE Alessandro
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('RIENTE Alessandro', 'riga38', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('RIENTE Alessandro', 'riga38', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga38')" id="annulla38" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga39">
+        <div class="nome">
+            RUSSO Rosario
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('RUSSO Rosario', 'riga39', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('RUSSO Rosario', 'riga39', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga39')" id="annulla39" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga40">
+        <div class="nome">
+            SABATELLA Luca
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('SABATELLA Luca', 'riga40', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('SABATELLA Luca', 'riga40', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga40')" id="annulla40" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga41">
+        <div class="nome">
+            SAGARIA Mattia
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('SAGARIA Mattia', 'riga41', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('SAGARIA Mattia', 'riga41', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga41')" id="annulla41" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga42">
+        <div class="nome">
+            SALVATORE Durante Cristian
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('SALVATORE Durante Cristian', 'riga42', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('SALVATORE Durante Cristian', 'riga42', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga42')" id="annulla42" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga43">
+        <div class="nome">
+            SASSANO Mattia
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('SASSANO Mattia', 'riga43', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('SASSANO Mattia', 'riga43', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga43')" id="annulla43" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga44">
+        <div class="nome">
+            SCARINGI Cristian
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('SCARINGI Cristian', 'riga44', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('SCARINGI Cristian', 'riga44', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga44')" id="annulla44" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga45">
+        <div class="nome">
+            SESSA Michele
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('SESSA Michele', 'riga45', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('SESSA Michele', 'riga45', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga45')" id="annulla45" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga46">
+        <div class="nome">
+            SINAEI Seyedartin
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('SINAEI Seyedartin', 'riga46', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('SINAEI Seyedartin', 'riga46', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga46')" id="annulla46" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga47">
+        <div class="nome">
+            VERNIERI Christian
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('VERNIERI Christian', 'riga47', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('VERNIERI Christian', 'riga47', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga47')" id="annulla47" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga48">
+        <div class="nome">
+            VIGNOLA Alessio
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('VIGNOLA Alessio', 'riga48', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('VIGNOLA Alessio', 'riga48', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga48')" id="annulla48" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga49">
+        <div class="nome">
+            VOLPE Giovanni
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('VOLPE Giovanni', 'riga49', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('VOLPE Giovanni', 'riga49', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga49')" id="annulla49" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="riga" id="riga50">
+        <div class="nome">
+            ZAMBRELLA Antonio
+            <div class="pulsante-container">
+                <button onclick="aggiungiRiepilogo('ZAMBRELLA Antonio', 'riga50', 'I TURNO')">I TURNO</button>
+                <button onclick="aggiungiRiepilogo('ZAMBRELLA Antonio', 'riga50', 'II TURNO')">II TURNO</button>
+                <button onclick="annullaScelta('riga50')" id="annulla50" disabled>Annulla</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- Riepilogo -->
+<div id="riepilogo">
+    <h2>Riepilogo</h2>
+    <ul id="riepilogoLista"></ul>
+    <button id="esportaButton" onclick="esportaRiepilogo()">Esporta Riepilogo</button>
+</div>
+
+<script>
+    // Dichiarazione di variabili globali per la somma e gli elenchi
+    var sommaITurno = 0;
+    var sommaIITurno = 0;
+    var elencoITurno = [];
+    var elencoIITurno = [];
+
+    // Funzione per aggiungere al riepilogo
+    function aggiungiRiepilogo(nome, idRiga, turno) {
+        // Aggiornamento della somma e degli elenchi
+        if (turno === 'I TURNO') {
+            sommaITurno++;
+            elencoITurno.push(nome);
+            document.getElementById(idRiga).classList.add('rigaPulsantePremutoI');
+        } else if (turno === 'II TURNO') {
+            sommaIITurno++;
+            elencoIITurno.push(nome);
+            document.getElementById(idRiga).classList.add('rigaPulsantePremutoII');
+        }
+
+        // Visualizza il riepilogo se non è già visibile
+        var riepilogo = document.getElementById('riepilogo');
+        if (riepilogo.style.display === 'none') {
+            riepilogo.style.display = 'block';
+        }
+
+        // Disabilita i pulsanti e cambia lo sfondo della riga
+        var riga = document.getElementById(idRiga);
+        riga.classList.add('rigaPulsantePremuto');
+        var pulsanti = riga.querySelectorAll('.pulsante-container button');
+        pulsanti.forEach(function(pulsante) {
+            pulsante.disabled = true;
+        });
+
+        // Abilita il pulsante "Annulla"
+        var annullaButton = document.getElementById('annulla' + idRiga.slice(-2));
+        annullaButton.disabled = false;
+
+        aggiornaRiepilogo()
+    }
+
+    // Funzione per annullare la scelta
+    function annullaScelta(idRiga) {
+        var riga = document.getElementById(idRiga);
+        riga.classList.remove('rigaPulsantePremuto', 'rigaPulsantePremutoI', 'rigaPulsantePremutoII');
+        var pulsanti = riga.querySelectorAll('.pulsante-container button');
+        pulsanti.forEach(function(pulsante) {
+            pulsante.disabled = false;
+        });
+
+        // Disabilita il pulsante "Annulla"
+        var annullaButton = document.getElementById('annulla' + idRiga.slice(-2));
+        annullaButton.disabled = true;
+
+        nome = riga.querySelector('.nome').firstChild.textContent.trim()
+        // Verifica se il nome estratto è presente nell'array
+        if (elencoITurno.includes(nome)) {
+            indiceITurno = elencoITurno.indexOf(nome);
+            elencoITurno.splice(indiceITurno, 1);
+            sommaITurno--;
+        } else {
+            indiceIITurno = elencoIITurno.indexOf(nome);
+            elencoIITurno.splice(indiceIITurno, 1);
+            sommaIITurno--;
+        }
+
+        aggiornaRiepilogo()
+    }
+
+    // Funzione per aggiornare il riepilogo
+    function aggiornaRiepilogo() {
+        // Trova l'elemento della lista del riepilogo
+        var riepilogoLista = document.getElementById('riepilogoLista');
+
+        // Cancella i vecchi elementi nella lista del riepilogo
+        riepilogoLista.innerHTML = '';
+
+        // Aggiungi nuovi elementi alla lista del riepilogo da elencoITurno
+        elencoITurno.forEach(function(nome) {
+            var nuovaVoce = document.createElement('li');
+            nuovaVoce.textContent = nome + ' - I TURNO';
+            riepilogoLista.appendChild(nuovaVoce);
+        });
+
+        // Aggiungi nuovi elementi alla lista del riepilogo da elencoIITurno
+        elencoIITurno.forEach(function(nome) {
+            var nuovaVoce = document.createElement('li');
+            nuovaVoce.textContent = nome + ' - II TURNO';
+            riepilogoLista.appendChild(nuovaVoce);
+        });
+    }
+
+    // Funzione per ottenere la data di oggi in formato "gg/mm/aaaa"
+    function getDataOggi() {
+        var oggi = new Date();
+        var giorno = oggi.getDate();
+        var mese = oggi.getMonth() + 1; // Gennaio è 0
+        var anno = oggi.getFullYear();
+
+        // Formatta la data come "gg/mm/aaaa"
+        return giorno + '/' + mese + '/' + anno;
+    }
+
+    // Aggiungi la data di oggi al div con id "dataOggi"
+    document.getElementById('dataOggi').textContent = 'Pranzo ' + getDataOggi();
+
+    // Funzione per esportare il riepilogo
+    function esportaRiepilogo() {
+        // Creazione del testo per il file .txt
+        var testoFile = "Elenco I TURNO:\n" + elencoITurno.join("\n") + "\nSomma I TURNO: " + sommaITurno + "\n\n";
+        testoFile += "Elenco II TURNO:\n" + elencoIITurno.join("\n") + "\nSomma II TURNO: " + sommaIITurno;
+
+        // Creazione dell'oggetto Blob
+        var blob = new Blob([testoFile], { type: 'text/plain' });
+
+        // Creazione del link di download
+        var link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+
+        var oggi = new Date();
+        var giorno = oggi.getDate();
+        var mese = oggi.getMonth() + 1; // Gennaio è 0
+        var anno = oggi.getFullYear();
+    
+        var nomeFile = 'Pranzo_' + giorno + '_' + mese + '_' + anno + '.txt';
+
+        link.download = nomeFile;
+        link.click();
+    }
+</script>
+
+</body>
+</html>
