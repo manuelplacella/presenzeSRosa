@@ -881,7 +881,10 @@
     }
 
     function resetta() {
-        localStorage.clear();
+        localStorage.removeItem('statoITurnoConvittori');
+        localStorage.removeItem('statoIITurnoConvittori');
+        elencoITurno = [];
+        elencoIITurno = [];
         location.reload();
     }
 
