@@ -19,12 +19,12 @@
             margin: 0 auto;
             font-size: 1.5em; /* Puoi regolare la dimensione del carattere a tuo piacimento */
             padding: 3px 7px;
-            background-color: #ff796f; /* Cambia il colore di sfondo a tuo piacimento */
+            background-color: #000dff; /* Cambia il colore di sfondo a tuo piacimento */
             color: #fff; /* Cambia il colore del testo a tuo piacimento */
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 500px;
+            margin-top: 200px;
         }
 
         .immagine-adattabile {
@@ -103,6 +103,18 @@
             border-radius: 8px;
             cursor: pointer;
         }
+
+        #reset {
+            margin-top: 100px;
+            font-size: 1.5em; /* Aumenta la dimensione del carattere */
+            background-color: #ff0000; /* Cambia il colore di sfondo a verde */
+            color: #fff; /* Cambia il colore del testo a bianco */
+            padding: 3px 7px; /* Aumenta il padding per renderlo più grande */
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
@@ -675,6 +687,8 @@
     <button id="esportaButton" onclick="esportaRiepilogo()">Esporta Riepilogo</button>
 </div>
 
+<button id="reset"  onclick="resetta()">Resetta</button>
+
 <button id="pulsanteNaviga" onclick="navigaAPagina('index.html')">Presenze Semiconvittori</button>
 
 
@@ -689,10 +703,12 @@
     function aggiungiRiepilogo(nome, idRiga, turno) {
         // Aggiornamento della somma e degli elenchi
         if (turno === 'I TURNO') {
+            playSound(1);
             sommaITurno++;
             elencoITurno.push(nome);
             document.getElementById(idRiga).classList.add('rigaPulsantePremutoI');
         } else if (turno === 'II TURNO') {
+            playSound(2);
             sommaIITurno++;
             elencoIITurno.push(nome);
             document.getElementById(idRiga).classList.add('rigaPulsantePremutoII');
@@ -716,7 +732,9 @@
         var annullaButton = document.getElementById('annulla' + idRiga.slice(-2));
         annullaButton.disabled = false;
 
-        aggiornaRiepilogo()
+        aggiornaRiepilogo();
+
+        salvaStatoInLocalStorage();
     }
 
     // Funzione per annullare la scelta
@@ -744,7 +762,9 @@
             sommaIITurno--;
         }
 
-        aggiornaRiepilogo()
+        aggiornaRiepilogo();
+
+        salvaStatoInLocalStorage();
     }
 
     // Funzione per aggiornare il riepilogo
@@ -781,6 +801,94 @@
         return giorno + '/' + mese + '/' + anno;
     }
 
+    // Funzione per caricare lo stato delle liste da localStorage
+    function caricaStatoDaLocalStorage() {
+            // Carica i dati da localStorage
+            var statoITurno = localStorage.getItem('statoITurnoConvittori');
+            var statoIITurno = localStorage.getItem('statoIITurnoConvittori');
+
+            // Verifica se i dati sono presenti in localStorage
+            if (statoITurno) {
+                elencoITurno = JSON.parse(statoITurno);
+                sommaITurno = elencoITurno.length;
+            }
+
+            if (statoIITurno) {
+                elencoIITurno = JSON.parse(statoIITurno);
+                sommaIITurno = elencoIITurno.length;
+            }
+
+            // Aggiorna il riepilogo
+            aggiornaRiepilogo();
+        }
+
+    // Funzione per salvare lo stato delle liste in localStorage
+    function salvaStatoInLocalStorage() {
+        // Salva i dati in localStorage
+        localStorage.setItem('statoITurnoConvittori', JSON.stringify(elencoITurno));
+        localStorage.setItem('statoIITurnoConvittori', JSON.stringify(elencoIITurno));
+    }
+
+    // Funzione per colorare le righe in base al turno
+    function ricoloraRighe() {
+        elencoITurno.forEach(function (nome) {
+            var idRiga = ricercaIdRigaDaNome(nome);
+            if (idRiga) {
+                var riga = document.getElementById(idRiga);
+                riga.classList.add('rigaPulsantePremutoI');
+                riga.classList.add('rigaPulsantePremuto');
+                var pulsanti = riga.querySelectorAll('.pulsante-container button');
+                pulsanti.forEach(function(pulsante) {
+                    pulsante.disabled = true;
+                });
+
+                // Abilita il pulsante "Annulla"
+                var annullaButton = document.getElementById('annulla' + idRiga.slice(-2));
+                annullaButton.disabled = false;
+            }
+        });
+
+        elencoIITurno.forEach(function (nome) {
+            var idRiga = ricercaIdRigaDaNome(nome);
+            if (idRiga) {
+                var riga = document.getElementById(idRiga);
+                riga.classList.add('rigaPulsantePremutoII');
+                riga.classList.add('rigaPulsantePremuto');
+                var pulsanti = riga.querySelectorAll('.pulsante-container button');
+                pulsanti.forEach(function(pulsante) {
+                    pulsante.disabled = true;
+                });
+
+                // Abilita il pulsante "Annulla"
+                var annullaButton = document.getElementById('annulla' + idRiga.slice(-2));
+                annullaButton.disabled = false;
+            }
+        });
+    }
+
+    // Funzione per cercare l'ID della riga da un nome
+    function ricercaIdRigaDaNome(nome) {
+        console.log(nome)
+        var righe = document.querySelectorAll('.riga');
+        for (var i = 0; i < righe.length; i++) {
+            var nomeRiga = righe[i].querySelector('.nome').firstChild.textContent.trim();
+            if (nomeRiga === nome) {
+                console.log(righe[i].id)
+                return righe[i].id;
+            }
+        }
+        return null;
+    }
+
+    function resetta() {
+        localStorage.clear();
+        location.reload();
+    }
+
+    // Chiamata per caricare lo stato al caricamento della pagina
+    caricaStatoDaLocalStorage();
+    ricoloraRighe();
+
     // Aggiungi la data di oggi al div con id "dataOggi"
     document.getElementById('dataOggi').textContent = 'Pranzo ' + getDataOggi();
 
@@ -813,6 +921,16 @@
     // Funzione per navigare alla nuova pagina
     function navigaAPagina(pagina) {
         window.location.href = pagina;
+    }
+
+    function playSound(turno) {
+        if(turno === 1) {
+            var audio = new Audio('suono2.mp3');
+            audio.play();
+        } else {
+            var audio = new Audio('suono1.mp3');
+            audio.play();
+        } 
     }
 </script>
 
