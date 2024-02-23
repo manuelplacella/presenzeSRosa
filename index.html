@@ -541,8 +541,26 @@
 
         salvaStatoInLocalStorage();
     }
+
+
+    function leggiPassword(){
+        var passwordInserita = prompt("Inserisci la password per annullare la scelta:");
+
+        // Controlla se la password è corretta
+        var passwordCorretta = "convittosrosa2024"; // Sostituisci con la tua password
+        if (passwordInserita !== passwordCorretta) {
+            alert("Password errata.");
+            return false; // Interrompe l'esecuzione della funzione se la password è errata
+        } 
+        return true;
+    }
+
+
     // Funzione per annullare la scelta
     function annullaScelta(idRiga) {
+        if(!leggiPassword()){
+            return;
+        }
         var riga = document.getElementById(idRiga);
         riga.classList.remove('rigaPulsantePremuto', 'rigaPulsantePremutoI', 'rigaPulsantePremutoII');
         var pulsanti = riga.querySelectorAll('.pulsante-container button');
@@ -685,6 +703,9 @@
     }
 
     function resetta() {
+        if(!leggiPassword()){
+            return;
+        } 
         localStorage.removeItem('statoITurnoSemiconvittori');
         localStorage.removeItem('statoIITurnoSemiconvittori');
         elencoITurno = [];
